@@ -1,6 +1,6 @@
 document.querySelectorAll('.delete-button').forEach(btn => {
   btn.addEventListener('click', () => {
-    const li = btn.closest('li')        // only the row for this button
+    const li = btn.closest('li')
     const trackData = {
       track: li.querySelector('.track-name').textContent,
       artist: li.querySelector('.track-artist').textContent,
