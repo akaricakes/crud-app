@@ -2,41 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>MY APP</title>
+    <title>n11's trcklst ctrl</title>
+
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
-    <h1>May Node and Express be with you.</h1>
+    <div class="container">
+      <form action="/tracks" method="POST">
+        <h1 class=pen>n11's trcklst ctrl</h1>
+        <p><span>*</span> is required.</p>
 
-    <form action="/tracks" method="POST">
-      <input type="text" placeholder="name" name="name" />
-      <input type="text" placeholder="track" name="track" />
-      <button type="submit">Submit</button>
-    </form>
+        <input type="text" required placeholder="Track*" name="track" />
+        <input type="text" required placeholder="Artist*" name="artist" />
+        <input type="text" required placeholder="Album*" name="album" />
+        <input type="text" required placeholder="Duration*" name="duration" />
 
-    <h2>Tracklist</h2>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
 
-    <ul class="tracks">
-      <% for(var i = 0; i < tracks.length; i++) { %>
-        <li class="track">
-          <span><%= tracks[i].name %></span>:
-          <span><%= tracks[i].track %></span>
+    <div class="tracklist">
+      <h1>Tracklist</h1>
+      <ul>
+        <li class="header">
+          <div class="track-info">
+            <span>Title</span>
+            <span>Artist</span>
+            <span>Album</span>
+            <span>Duration</span>
+          </div>
+          <div class="track-actions"></div>
         </li>
-      <% } %>
-    </ul>
 
-    <div>
-      <h2>Darth Vader invades!</h2>
-      <p>Replaces a random track from the tracklist!</p>
-      <button id="update-button">Replace a random track</button>
+        <% for(var i = 0; i < tracks.length; i++) { %>
+          <li>
+            <div class="track-info">
+              <span class="track-name"><%= tracks[i].track %></span>
+              <span class="track-artist"><%= tracks[i].artist %></span>
+              <span class="track-album italic"><%= tracks[i].album %></span>
+              <span class="track-duration"><%= tracks[i].duration %></span>
+            </div>
+            <div class="track-actions">
+              <button class="edit-button">✎</button>
+              <button class="delete-button">✖</button>
+            </div>
+          </li>
+        <% } %>
+      </ul>
     </div>
-
-    <div>
-      <h2>Remove last track!</h2>
-      <button id="delete-button">Delete the last track</button>
-    </div>
-    <div id="message"></div>
-
     <script src="/main.js"></script>
   </body>
 </html>

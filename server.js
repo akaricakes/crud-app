@@ -11,7 +11,7 @@ const connectionString = "mongodb://akari:aIEpzzM11Xjvr0fq@ac-djoskji-shard-00-0
 MongoClient.connect(connectionString)
   .then(client => {
     const db = client.db('n11-database')
-    const trackList = db.tracklist('tracks')
+    const trackList = db.collection('tracks')
 
     app.post('/tracks', (req, res) => {
       trackList.insertOne(req.body)
@@ -22,43 +22,28 @@ MongoClient.connect(connectionString)
     })
 
     app.get('/', (req, res) => {
-      db.collection('tracks')
-        .find()
-        .toArray()
-        .then(results => {
-          res.render('index.ejs', { tracks: results })
-        })
-        .catch(error => console.error(error))
+      trackList.find()
+      .toArray()
+      .then(results => {
+        res.render('index.ejs', { tracks: results })
+      })
+      .catch(error => console.error(error))
     })
 
-    app.put('/tracks', (req, res) => {
-      trackList.findOneAndUpdate(
-        { name: 'Yoda' },
-        {
-          $set: {
-            name: req.body.name,
-            track: req.body.track,
-          },
-        },
-        {
-          upsert: true,
-        }
-      )
-    .catch(error => console.error(error))
+    app.delete('/tracks', async (req, res) => {
+      const { track, artist, album, duration } = req.body
+      await trackList.deleteOne({ track, artist, album, duration })
+      res.json({ success: true })
+    })
 
-    app.delete('/tracks', (req, res) => {
-      trackList.deleteOne({ name: req.body.name })
-        .then(result => {
-          if (result.deletedCount === 0) {
-            return res.json('No track to delete')
-          }
-        })
-        .catch(error => console.error(error))
+    app.put('/tracks', async (req, res) => {
+      const { oldTrack, newTrack } = req.body
+      await trackList.updateOne(filterObject, { $set: updatedFields })
+      res.json({ success: true })
+    })
+
+    app.listen(3000, () => {
+        console.log('listening on 3000')
     })
   })
-})
 .catch(error => console.error(error))
-
-app.listen(3000, function () {
-  console.log('listening on 3000')
-})

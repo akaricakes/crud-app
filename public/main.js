@@ -1,44 +1,46 @@
-const update = document.querySelector('#update-button')
-const data = {
-  name: '',
-  track: '',
-}
-const deleteButton = document.querySelector('#delete-button')
-const messageDiv = document.querySelector('#message')
+document.querySelectorAll('.delete-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const li = btn.closest('li')        // only the row for this button
+    const trackData = {
+      track: li.querySelector('.track-name').textContent,
+      artist: li.querySelector('.track-artist').textContent,
+      album: li.querySelector('.track-album').textContent,
+      duration: li.querySelector('.track-duration').textContent
+    }
 
-deleteButton.addEventListener('click', _ => {
-  fetch('/tracks', {
-    method: 'delete',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: 'Darth Vader'
+    if (!confirm(`Delete "${trackData.track}" by ${trackData.artist}?`)) return
+
+    fetch('/tracks', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(trackData)
     })
+      .then(res => res.json())
+      .then(() => window.location.reload())
   })
-    .then(res => res.json())
-    .then(data => {
-      if (data === 'No track to delete') {
-        messageDiv.textContent = 'No track to delete'
-      } else {
-        window.location.reload()
-      }
-    })
-    .catch(err => console.error(err))
 })
 
-update.addEventListener('click', _ => {
-  fetch('/tracks', {
-    method: 'put',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: '',
-      track: '',
-    }),
+document.querySelectorAll('.edit-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const li = btn.closest('li')
+    const oldTrack = {
+      track: li.querySelector('.track-name').textContent,
+      artist: li.querySelector('.track-artist').textContent,
+      album: li.querySelector('.track-album').textContent,
+      duration: li.querySelector('.track-duration').textContent
+    }
+
+    const newTrack = prompt('Track name:', oldTrack.track) || oldTrack.track
+    const newArtist = prompt('Artist name:', oldTrack.artist) || oldTrack.artist
+    const newAlbum = prompt('Album:', oldTrack.album) || oldTrack.album
+    const newDuration = prompt('Duration:', oldTrack.duration) || oldTrack.duration
+
+    fetch('/tracks', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ oldTrack, newTrack: { track: newTrack, artist: newArtist, album: newAlbum, duration: newDuration } })
+    })
+      .then(res => res.json())
+      .then(() => window.location.reload())
   })
-    .then(res => {
-      if (res.ok) return res.json()
-    })
-    .then(response => {
-      window.location.reload(true)
-    })
-    .catch(err => console.error(err))
 })

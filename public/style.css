@@ -1,0 +1,163 @@
+@font-face {
+  font-family: "instrumentFont";
+  src: url("./fonts/InstrumentSerif-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #F2E1C9;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 640px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 24px;
+  margin: 40px auto 0 auto;
+}
+
+form {
+  color:#E0A387;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h1 {
+  font-size: 2.25rem; 
+  font-weight: bold;
+  color: #E0A387;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+p span {
+  color: #f56565;
+}
+
+html {
+  font-family: instrumentFont;
+}
+
+input[type="text"] {
+  font-family: instrumentFont;
+  width: 100%;
+  background-color: #f3f4f6;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #9ca3af;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button {
+  font-family: instrumentFont;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #BA6B57;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #E0A387;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: #BA6B57;
+}
+
+.tracklist {
+  max-width: 640px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin: 40px auto 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tracklist h1 {
+  margin-bottom: 16px;
+  color: #BA6B57;
+}
+
+.tracklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tracklist li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.tracklist li.header {
+  font-weight: bold;
+  border-bottom: 2px solid #BA6B57;
+  margin-bottom: 8px;
+}
+
+.tracklist li .track-info span {
+  margin-right: 16px;
+  color: #BA6B57;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tracklist li .track-info span.italic {
+  font-style: italic;
+}
+
+.tracklist li .track-actions button {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button {
+  background-color: #fbbf24;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #facc15;
+}
+
+.delete-button {
+  background-color: #f56565;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #ef4444;
+}
