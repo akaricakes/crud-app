@@ -6,7 +6,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
 const MongoClient = require('mongodb').MongoClient
-const connectionString = "mongodb://akari:aIEpzzM11Xjvr0fq@ac-djoskji-shard-00-00.lv4xmjs.mongodb.net:27017,ac-djoskji-shard-00-01.lv4xmjs.mongodb.net:27017,ac-djoskji-shard-00-02.lv4xmjs.mongodb.net:27017/?ssl=true&replicaSet=atlas-s4fti3-shard-0&authSource=admin&appName=akripan";
 
 MongoClient.connect(connectionString)
   .then(client => {
