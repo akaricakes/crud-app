@@ -13,6 +13,6 @@ In this submission, there are two main components:
 
 - index.ejs (which handles all of the text "meat" of the site)
 - main.js (which holds all of the button actions)
-- server.js (which includes all CRUD operations such as delete, get, listen, and post)
+- server.js (which includes all CRUD operations such as delete, get, post, and put)
 
 CSS elements can be found in style.css.
