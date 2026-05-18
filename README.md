@@ -6,8 +6,9 @@ The template for this site was derived from my previous homework submission.
 As this site utilizes MongoDB, you will need to host it locally. Here's how to do that:
 
 1. Pull this repository onto your computer.
-2. Use `npm run dev` to run locally.
-3. And you're done!
+2. Drop the .env file given into the repository folder.
+3. Use `npm run dev` to run locally.
+4. And you're done!
 
 In this submission, there are two main components:
 
