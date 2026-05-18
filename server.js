@@ -1,3 +1,4 @@
+const { MongoClient } = require('mongodb')
 const express = require('express')
 const app = express()
 
@@ -5,8 +6,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
-const MongoClient = require('mongodb').MongoClient
-const connectionString = "mongodb://akari:aIEpzzM11Xjvr0fq@ac-djoskji-shard-00-00.lv4xmjs.mongodb.net:27017,ac-djoskji-shard-00-01.lv4xmjs.mongodb.net:27017,ac-djoskji-shard-00-02.lv4xmjs.mongodb.net:27017/?ssl=true&replicaSet=atlas-s4fti3-shard-0&authSource=admin&appName=akripan";
+require('dotenv').config()
+const connectionString = process.env.MONGO_URI
+console.log(connectionString)
 
 MongoClient.connect(connectionString)
   .then(client => {
@@ -38,7 +40,7 @@ MongoClient.connect(connectionString)
 
     app.put('/tracks', async (req, res) => {
       const { oldTrack, newTrack } = req.body
-      await trackList.updateOne(filterObject, { $set: updatedFields })
+      await trackList.updateOne(oldTrack, { $set: newTrack })
       res.json({ success: true })
     })
 
